@@ -20,6 +20,10 @@ class ReceiveMessage : IDataReceiver
         {
             throw new InvalidOperationException("Failed to receive message data due to insufficient permissions.", ex);
         }
+        catch (OperationCanceledException ex)
+        {
+            throw new TaskCanceledException("Message receiver task was cancelled.", ex);
+        }
     }
 }
 class ReceiveFile : IDataReceiver
@@ -39,6 +43,10 @@ class ReceiveFile : IDataReceiver
         catch (UnauthorizedAccessException ex)
         {
             throw new InvalidOperationException("Failed to receive file data due to insufficient permissions.", ex);
+        }
+        catch (OperationCanceledException ex)
+        {
+            throw new TaskCanceledException("File receiver task was cancelled.", ex);
         }
     }
 }

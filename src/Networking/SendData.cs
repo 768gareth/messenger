@@ -22,6 +22,10 @@ class SendMessage : IDataSender
         {
             throw new InvalidOperationException("Failed to send message data due to insufficient permissions.", ex);
         }
+        catch (OperationCanceledException ex)
+        {
+            throw new TaskCanceledException("Message sender task was cancelled.", ex);
+        }
     }
 }
 class SendFile : IDataSender
@@ -41,6 +45,10 @@ class SendFile : IDataSender
         catch (UnauthorizedAccessException ex)
         {
             throw new InvalidOperationException("Failed to send file data due to insufficient permissions.", ex);
+        }
+        catch (OperationCanceledException ex)
+        {
+            throw new TaskCanceledException("File sender task was cancelled.", ex);
         }
     }
 }

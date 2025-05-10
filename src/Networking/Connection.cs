@@ -1,5 +1,5 @@
-interface IConnectionManager // TODO: Each connection must be constant and maintained.
+interface IConnection
 {
-
+    Task Connect();
 }
 
